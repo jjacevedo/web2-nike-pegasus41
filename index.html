@@ -184,14 +184,15 @@
     }
 
     .hero-top {
-      padding: 64px 0 80px;
+      padding: 36px 0 56px;
     }
 
     .hero-layout {
       display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
-      gap: 44px;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 10px;
       align-items: center;
+      min-height: calc(100vh - 92px);
     }
 
     .hero-kicker {
@@ -226,9 +227,9 @@
 
     .hero-image-shell {
       width: 100%;
-      max-width: 640px;
+      max-width: 980px;
       margin-left: auto;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 5 / 4;
       display: grid;
       place-items: center;
       overflow: visible;
@@ -237,11 +238,13 @@
     }
 
     .hero-image-shell img {
-      width: 100%;
+      width: 132%;
       height: 100%;
       object-fit: contain;
       object-position: center;
-      filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.12));
+      filter: none;
+      mix-blend-mode: multiply;
+      transform: translateX(4%) scale(1.1);
     }
 
     .video-story {
@@ -556,11 +559,17 @@
       .hero-layout {
         grid-template-columns: 1fr;
         gap: 26px;
+        min-height: unset;
       }
 
       .hero-image-shell {
         margin-left: 0;
         max-width: 100%;
+      }
+
+      .hero-image-shell img {
+        width: 106%;
+        transform: scale(1.03);
       }
 
       .video-story-layout {
@@ -623,6 +632,10 @@
 
       .hero-top {
         padding: 42px 0 64px;
+      }
+
+      .hero-image-shell {
+        aspect-ratio: 4 / 5;
       }
 
       .story-item h3 {
@@ -690,7 +703,7 @@
           </p>
         </div>
         <div class="hero-image-shell reveal">
-          <img src="896589-1200-auto.webp" alt="Nike Pegasus 41" />
+          <img src="i1.png" alt="Nike Pegasus 41" />
         </div>
       </div>
     </section>
