@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="i1.png" fetchpriority="high" />
   <style>
     :root {
       --bg: #ffffff;
@@ -66,6 +67,13 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid #111;
+      outline-offset: 3px;
     }
 
     .container {
@@ -220,9 +228,77 @@
     .hero-text {
       font-family: var(--font-nike-ui);
       font-size: clamp(16px, 1.45vw, 20px);
-      color: #3c3f44;
+      color: #1e2329;
       line-height: 1.65;
       max-width: 54ch;
+    }
+
+    .hero-cta-row {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      height: 44px;
+      padding: 0 22px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-btn-primary {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .hero-btn-secondary {
+      border: 1px solid rgba(15, 15, 16, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+      color: #111;
+    }
+
+    .hero-spec-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 620px;
+    }
+
+    .hero-spec {
+      border: 1px solid rgba(15, 15, 16, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 12px;
+      padding: 12px 12px 11px;
+    }
+
+    .hero-spec strong {
+      display: block;
+      font-family: var(--font-nike-display);
+      font-size: 26px;
+      line-height: 0.95;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .hero-spec span {
+      display: block;
+      font-size: 12px;
+      color: #444a52;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
     .hero-image-shell {
@@ -250,6 +326,15 @@
     .video-story {
       position: relative;
       padding: 20px 0 120px;
+    }
+
+    .video-story::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.32) 34%, rgba(255, 255, 255, 0.1) 62%, rgba(255, 255, 255, 0.18) 100%);
     }
 
     .video-story-layout {
@@ -304,10 +389,11 @@
 
     .story-item p {
       font-family: var(--font-nike-ui);
-      color: #46494f;
+      color: #1f252b;
       line-height: 1.6;
       font-size: 17px;
       max-width: 34ch;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 
     .video-column {
@@ -398,6 +484,13 @@
       width: 100%;
       height: 250px;
       object-fit: cover;
+    }
+
+    .product-card img.card-image-center {
+      object-fit: cover;
+      object-position: center;
+      padding: 0;
+      background: transparent;
     }
 
     .card-body {
@@ -572,6 +665,10 @@
         transform: scale(1.03);
       }
 
+      .hero-spec-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .video-story-layout {
         min-height: 210vh;
       }
@@ -638,6 +735,14 @@
         aspect-ratio: 4 / 5;
       }
 
+      .hero-spec-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-btn {
+        width: 100%;
+      }
+
       .story-item h3 {
         font-size: clamp(30px, 10vw, 44px);
       }
@@ -701,9 +806,27 @@
             Diseñadas para acompañarte en cada kilómetro con una amortiguación reactiva, transición fluida y una sensación de ligereza
             total. Pegasus 41 eleva tu ritmo con confort premium y control preciso en ciudad o pista.
           </p>
+          <div class="hero-cta-row">
+            <a class="hero-btn hero-btn-primary" href="#">Comprar ahora</a>
+            <a class="hero-btn hero-btn-secondary" href="#">Ver tallas</a>
+          </div>
+          <div class="hero-spec-grid" aria-label="Especificaciones rápidas">
+            <div class="hero-spec">
+              <strong>275g</strong>
+              <span>Peso aprox.</span>
+            </div>
+            <div class="hero-spec">
+              <strong>10mm</strong>
+              <span>Drop</span>
+            </div>
+            <div class="hero-spec">
+              <strong>Daily</strong>
+              <span>Uso diario</span>
+            </div>
+          </div>
         </div>
         <div class="hero-image-shell reveal">
-          <img src="i1.png" alt="Nike Pegasus 41" />
+          <img src="i1.png" alt="Nike Pegasus 41" decoding="async" fetchpriority="high" />
         </div>
       </div>
     </section>
@@ -741,7 +864,8 @@
                 src="Hailuo_Video_SHOT 1 — The Lid Lifts & Shoes_487888625000050691.mp4"
                 muted
                 playsinline
-                preload="auto"
+                preload="metadata"
+                poster="1773176605290-vbvkjmtqht.jpg"
               ></video>
               <div class="white-blend"></div>
             </div>
@@ -753,7 +877,7 @@
     <section class="cards-section">
       <div class="container cards-grid">
         <article class="product-card reveal">
-          <img src="image.avif" alt="Amortiguación precisa" />
+          <img src="image.avif" alt="Amortiguación precisa" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Amortiguación Reactiva</h3>
             <p class="card-text">Espuma de última generación para una pisada suave, estable y con retorno de energía constante.</p>
@@ -761,7 +885,7 @@
         </article>
 
         <article class="product-card reveal">
-          <img src="image%20(2).avif" alt="Upper transpirable" />
+          <img class="card-image-center" src="image%20(2).avif" alt="Upper transpirable" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Ajuste Transpirable</h3>
             <p class="card-text">Construcción ligera que mantiene el pie fresco y sujeto para correr con confianza en cualquier ritmo.</p>
@@ -769,7 +893,7 @@
         </article>
 
         <article class="product-card reveal">
-          <img src="image%20(1).avif" alt="Tracción confiable" />
+          <img src="image%20(1).avif" alt="Tracción confiable" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Tracción Segura</h3>
             <p class="card-text">Suela con agarre optimizado para una transición firme en asfalto seco o condiciones variables.</p>
@@ -779,13 +903,13 @@
     </section>
 
     <section class="full-width-media reveal">
-      <img src="image.jpg" alt="Nike Pegasus 41 full width" />
+      <img src="image.jpg" alt="Nike Pegasus 41 full width" loading="lazy" decoding="async" />
     </section>
 
     <section class="review">
       <div class="container review-layout">
         <div class="review-image reveal">
-          <img src="image%20(1).jpg" alt="Evaluador con Nike Pegasus 41" />
+          <img src="image%20(1).jpg" alt="Evaluador con Nike Pegasus 41" loading="lazy" decoding="async" />
         </div>
         <div class="review-quote reveal">
           <blockquote>
@@ -821,6 +945,7 @@
       let targetTime = 0;
       let smoothTime = 0;
       let rafId = null;
+      let isScrubActive = true;
 
       function clamp(value, min, max) {
         return Math.max(min, Math.min(max, value));
@@ -867,6 +992,10 @@
       }
 
       function animateVideo() {
+        if (!isScrubActive) {
+          rafId = null;
+          return;
+        }
         smoothTime += (targetTime - smoothTime) * 0.12;
         if (video.readyState >= 2) {
           const delta = Math.abs(video.currentTime - smoothTime);
@@ -875,6 +1004,21 @@
           }
         }
         rafId = requestAnimationFrame(animateVideo);
+      }
+
+      function startScrubLoop() {
+        if (!rafId) {
+          isScrubActive = true;
+          rafId = requestAnimationFrame(animateVideo);
+        }
+      }
+
+      function stopScrubLoop() {
+        isScrubActive = false;
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
       }
 
       function onScrollResize() {
@@ -901,7 +1045,21 @@
         window.addEventListener("scroll", onScrollResize, { passive: true });
         window.addEventListener("resize", onScrollResize);
         onScrollResize();
-        animateVideo();
+        startScrubLoop();
+
+        const videoObserver = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            if (entry.isIntersecting) {
+              onScrollResize();
+              startScrubLoop();
+            } else {
+              stopScrubLoop();
+            }
+          },
+          { threshold: 0.01 }
+        );
+        videoObserver.observe(videoSection);
       }
 
       const revealElements = document.querySelectorAll(".reveal");
@@ -921,7 +1079,7 @@
       initScrub();
 
       window.addEventListener("beforeunload", function () {
-        if (rafId) cancelAnimationFrame(rafId);
+        stopScrubLoop();
       });
     })();
   </script>
