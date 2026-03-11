@@ -55,7 +55,17 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-nike-ui);
-      scroll-behavior: smooth;
+    }
+
+    body.preload .hero-content,
+    body.preload .hero-image-shell {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .hero-content,
+    .hero-image-shell {
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     img,
@@ -89,6 +99,35 @@
       -webkit-backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.82);
       border-bottom: 1px solid var(--line);
+      transition: background-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease, -webkit-backdrop-filter 0.28s ease;
+    }
+
+    .site-header.scrolled-solid {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(15, 15, 16, 0.08);
+      border-bottom: 1px solid rgba(15, 15, 16, 0.06);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: 1300;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .scroll-progress-bar {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #111 0%, #d1272f 100%);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.08s linear;
     }
 
     .header-inner {
@@ -192,6 +231,7 @@
     }
 
     .hero-top {
+      position: relative;
       padding: 36px 0 56px;
     }
 
@@ -223,6 +263,22 @@
       text-transform: uppercase;
       letter-spacing: 0.005em;
       margin-bottom: 22px;
+    }
+
+    .hero-title .hero-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroWordIn 0.55s cubic-bezier(0.22, 0.9, 0.26, 1) forwards;
+      animation-delay: calc(var(--word-index) * 90ms + 120ms);
+      margin-right: 0.18em;
+    }
+
+    @keyframes heroWordIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-text {
@@ -314,13 +370,61 @@
     }
 
     .hero-image-shell img {
+      --hero-parallax-y: 0px;
       width: 132%;
       height: 100%;
       object-fit: contain;
       object-position: center;
       filter: none;
-      mix-blend-mode: multiply;
-      transform: translateX(4%) scale(1.1);
+      mix-blend-mode: normal;
+      transform: translateX(4%) translateY(var(--hero-parallax-y)) scale(1.1);
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: #1d2228;
+      z-index: 4;
+      opacity: 0.9;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-scroll-indicator.is-hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px);
+      pointer-events: none;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(180deg, rgba(29, 34, 40, 0.18), rgba(29, 34, 40, 0.9));
+      animation: heroScrollLine 1.6s ease-in-out infinite;
+    }
+
+    .hero-scroll-arrow {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #1d2228;
+      border-bottom: 2px solid #1d2228;
+      transform: rotate(45deg);
+      animation: heroScrollArrow 1.6s ease-in-out infinite;
+    }
+
+    @keyframes heroScrollLine {
+      0%, 100% { transform: scaleY(0.8); opacity: 0.5; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    @keyframes heroScrollArrow {
+      0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.5; }
+      50% { transform: rotate(45deg) translate(2px, 2px); opacity: 1; }
     }
 
     .video-story {
@@ -447,6 +551,23 @@
       object-position: center;
     }
 
+    .video-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 4;
+      opacity: 1;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .video-poster.is-hidden {
+      opacity: 0;
+    }
+
     .white-blend {
       position: absolute;
       inset: 0;
@@ -484,6 +605,11 @@
       width: 100%;
       height: 250px;
       object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.04);
     }
 
     .product-card img.card-image-center {
@@ -518,12 +644,15 @@
     .full-width-media {
       width: 100%;
       padding: 0 0 92px;
+      overflow: hidden;
     }
 
     .full-width-media img {
+      --campaign-parallax-y: 0px;
       width: 100%;
       height: clamp(260px, 42vw, 640px);
       object-fit: cover;
+      transform: translateY(var(--campaign-parallax-y)) scale(1.04);
     }
 
     .review {
@@ -580,14 +709,21 @@
     .site-footer {
       border-top: 1px solid var(--line);
       background: #fff;
-      padding: 28px 0;
+      padding: 34px 0;
     }
 
     .footer-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .footer-top {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: 24px;
       align-items: center;
+      gap: 18px;
     }
 
     .footer-logo {
@@ -598,7 +734,7 @@
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 18px;
       font-family: var(--font-nike-ui);
       font-size: 14px;
@@ -606,11 +742,74 @@
       color: #2f3238;
     }
 
+    .footer-country {
+      font-family: var(--font-nike-ui);
+      font-size: 13px;
+      color: #444a52;
+      border: 1px solid rgba(15, 15, 16, 0.14);
+      border-radius: 999px;
+      height: 34px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .footer-mid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      border-top: 1px solid rgba(15, 15, 16, 0.08);
+      border-bottom: 1px solid rgba(15, 15, 16, 0.08);
+      padding: 14px 0;
+      align-items: center;
+    }
+
+    .footer-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: #3f444c;
+      font-family: var(--font-nike-ui);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .footer-social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 15, 16, 0.14);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #22252a;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .copyright {
       font-family: var(--font-nike-ui);
       font-size: 13px;
       color: #656971;
-      text-align: right;
+      text-align: left;
       white-space: nowrap;
     }
 
@@ -662,7 +861,7 @@
 
       .hero-image-shell img {
         width: 106%;
-        transform: scale(1.03);
+        transform: translateY(var(--hero-parallax-y)) scale(1.03);
       }
 
       .hero-spec-grid {
@@ -698,9 +897,28 @@
       }
 
       .footer-layout {
-        grid-template-columns: 1fr;
         gap: 16px;
-        text-align: center;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+
+      .footer-mid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        justify-content: center;
       }
 
       .copyright {
@@ -770,6 +988,9 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  </div>
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand-wrap">
@@ -829,6 +1050,10 @@
           <img src="i1.png" alt="Nike Pegasus 41" decoding="async" fetchpriority="high" />
         </div>
       </div>
+      <a class="hero-scroll-indicator" id="hero-scroll-indicator" href="#video-story" aria-label="Desplazarse hacia abajo">
+        <span class="hero-scroll-line"></span>
+        <span class="hero-scroll-arrow"></span>
+      </a>
     </section>
 
     <section class="video-story" id="video-story">
@@ -867,6 +1092,7 @@
                 preload="metadata"
                 poster="1773176605290-vbvkjmtqht.jpg"
               ></video>
+              <img class="video-poster" id="video-poster" src="1773176605290-vbvkjmtqht.jpg" alt="" aria-hidden="true" />
               <div class="white-blend"></div>
             </div>
           </div>
@@ -876,7 +1102,7 @@
 
     <section class="cards-section">
       <div class="container cards-grid">
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-reveal-delay="0ms">
           <img src="image.avif" alt="Amortiguación precisa" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Amortiguación Reactiva</h3>
@@ -884,7 +1110,7 @@
           </div>
         </article>
 
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-reveal-delay="90ms">
           <img class="card-image-center" src="image%20(2).avif" alt="Upper transpirable" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Ajuste Transpirable</h3>
@@ -892,7 +1118,7 @@
           </div>
         </article>
 
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-reveal-delay="180ms">
           <img src="image%20(1).avif" alt="Tracción confiable" loading="lazy" decoding="async" />
           <div class="card-body">
             <h3 class="card-title">Tracción Segura</h3>
@@ -923,23 +1149,53 @@
 
   <footer class="site-footer">
     <div class="container footer-layout">
-      <img class="footer-logo" src="Logo_NIKE.svg" alt="Nike" />
-      <nav class="footer-links" aria-label="Footer">
-        <a href="#">Find a store</a>
-        <a href="#">Help</a>
-        <a href="#">Join us</a>
-        <a href="#">Sing in</a>
-      </nav>
-      <p class="copyright">© 2026 Nike, Inc. All rights reserved.</p>
+      <div class="footer-top">
+        <img class="footer-logo" src="Logo_NIKE.svg" alt="Nike" />
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#">Find a store</a>
+          <a href="#">Help</a>
+          <a href="#">Join us</a>
+          <a href="#">Sing in</a>
+        </nav>
+        <span class="footer-country">Colombia · ES</span>
+      </div>
+      <div class="footer-mid">
+        <div class="footer-categories">
+          <span>Running</span>
+          <span>Training</span>
+          <span>Lifestyle</span>
+          <span>Basketball</span>
+          <span>Jordan</span>
+        </div>
+        <div class="footer-social" aria-label="Redes sociales">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="X">X</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Nike, Inc. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
   <script>
     (function () {
+      document.body.classList.add("preload");
       const videoSection = document.getElementById("video-story");
+      const heroSection = document.querySelector(".hero-top");
+      const siteHeader = document.querySelector(".site-header");
+      const heroScrollIndicator = document.getElementById("hero-scroll-indicator");
+      const scrollProgressBar = document.getElementById("scroll-progress-bar");
       const videoLayout = document.getElementById("video-story-layout");
       const videoSticky = document.getElementById("video-story-sticky");
       const video = document.getElementById("story-video");
+      const videoPoster = document.getElementById("video-poster");
+      const heroImage = document.querySelector(".hero-image-shell img");
+      const campaignImage = document.querySelector(".full-width-media img");
+      const heroTitle = document.querySelector(".hero-title");
+      const storyNums = document.querySelectorAll(".story-num");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let duration = 1;
       let targetTime = 0;
@@ -1022,8 +1278,90 @@
       }
 
       function onScrollResize() {
+        updateScrollProgress();
+        updateHeaderState();
+        updateHeroScrollIndicator();
         setPinState();
         updateProgress();
+        updateHeroParallax();
+        updateCampaignParallax();
+      }
+
+      function updateScrollProgress() {
+        if (!scrollProgressBar) return;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const progress = clamp(window.scrollY / maxScroll, 0, 1);
+        scrollProgressBar.style.transform = "scaleX(" + progress + ")";
+      }
+
+      function updateHeroParallax() {
+        if (!heroImage || prefersReducedMotion) return;
+        const parallaxY = Math.min(64, Math.max(0, window.scrollY * 0.09));
+        heroImage.style.setProperty("--hero-parallax-y", parallaxY + "px");
+      }
+
+      function updateCampaignParallax() {
+        if (!campaignImage || prefersReducedMotion) return;
+        const rect = campaignImage.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const imageCenter = rect.top + rect.height / 2;
+        const offset = (imageCenter - viewportCenter) * -0.06;
+        const parallaxY = Math.max(-30, Math.min(30, offset));
+        campaignImage.style.setProperty("--campaign-parallax-y", parallaxY + "px");
+      }
+
+      function updateHeaderState() {
+        if (!siteHeader || !heroSection) return;
+        const trigger = heroSection.offsetTop + heroSection.offsetHeight - 90;
+        siteHeader.classList.toggle("scrolled-solid", window.scrollY > trigger);
+      }
+
+      function updateHeroScrollIndicator() {
+        if (!heroScrollIndicator) return;
+        heroScrollIndicator.classList.toggle("is-hidden", window.scrollY > 40);
+      }
+
+      function initHeroTitleAnimation() {
+        if (!heroTitle || prefersReducedMotion) return;
+        const words = heroTitle.textContent.trim().split(/\s+/);
+        heroTitle.textContent = "";
+        words.forEach((word, idx) => {
+          const span = document.createElement("span");
+          span.className = "hero-word";
+          span.style.setProperty("--word-index", String(idx));
+          span.textContent = word;
+          heroTitle.appendChild(span);
+        });
+      }
+
+      function initStoryCounters() {
+        if (!storyNums.length || prefersReducedMotion) return;
+        const animateCounter = (el) => {
+          const finalValue = parseInt(el.textContent, 10) || 0;
+          const start = performance.now();
+          const durationMs = 680;
+
+          function frame(now) {
+            const progress = Math.min((now - start) / durationMs, 1);
+            const value = Math.round(finalValue * progress);
+            el.textContent = String(value).padStart(2, "0");
+            if (progress < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        };
+
+        const counterObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.55 }
+        );
+        storyNums.forEach((num) => counterObserver.observe(num));
       }
 
       function initScrub() {
@@ -1040,6 +1378,10 @@
 
         video.addEventListener("loadedmetadata", function () {
           duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 1;
+        });
+
+        video.addEventListener("canplay", function () {
+          if (videoPoster) videoPoster.classList.add("is-hidden");
         });
 
         window.addEventListener("scroll", onScrollResize, { passive: true });
@@ -1067,6 +1409,8 @@
         (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              const delay = entry.target.getAttribute("data-reveal-delay");
+              if (delay) entry.target.style.transitionDelay = delay;
               entry.target.classList.add("visible");
               observer.unobserve(entry.target);
             }
@@ -1076,7 +1420,20 @@
       );
 
       revealElements.forEach((el) => revealObserver.observe(el));
+      initHeroTitleAnimation();
+      initStoryCounters();
       initScrub();
+      updateHeroParallax();
+      updateCampaignParallax();
+      updateHeaderState();
+      updateHeroScrollIndicator();
+      updateScrollProgress();
+
+      window.addEventListener("load", function () {
+        requestAnimationFrame(function () {
+          document.body.classList.remove("preload");
+        });
+      });
 
       window.addEventListener("beforeunload", function () {
         stopScrubLoop();
