@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nike Pegasus 41</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f0f10;
+      --muted: #5a5d63;
+      --line: rgba(15, 15, 16, 0.1);
+      --soft-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --nike-red: #d1272f;
+      --maxw: 1220px;
+      --font-nike-ui: "Nike Sans", "Nike TG", "Inter", "Avenir Next", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-nike-display: "Futura Condensed Extra Black", "Futura Condensed ExtraBold", "Futura Extra Bold Condensed", "Futura Bold Condensed Oblique", "Futura Condensed Bold", "Futura PT Condensed ExtraBold", "Trade Gothic LT Std Bold Condensed No. 20", "Helvetica Neue Condensed Bold", "Barlow Condensed", "Arial Narrow", sans-serif;
+    }
+
+    @font-face {
+      font-family: "Nike Sans";
+      src: local("Nike Sans"), local("NikeSans");
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Nike TG";
+      src: local("Nike TG"), local("NikeTG");
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Futura Extra Bold Condensed";
+      src: local("Futura Extra Bold Condensed"), local("FuturaCondensed-ExtraBold"), local("Futura ExtraBold Condensed");
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-nike-ui);
+      scroll-behavior: smooth;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--maxw));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      height: 76px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-wrap {
+      justify-self: start;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-logo {
+      width: 68px;
+      height: auto;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--font-nike-ui);
+      font-size: 14px;
+      font-weight: 600;
+      justify-self: center;
+      white-space: nowrap;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -3px;
+      height: 1.5px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: #111;
+      transition: transform 0.24s ease;
+    }
+
+    .main-nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-input {
+      font-family: var(--font-nike-ui);
+      height: 38px;
+      width: 180px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 15, 16, 0.12);
+      padding: 0 14px;
+      outline: none;
+      background: #fff;
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: rgba(15, 15, 16, 0.26);
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .bag-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(15, 15, 16, 0.14);
+      background: #fff;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.2s ease;
+    }
+
+    .bag-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    }
+
+    .bag-btn img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .hero-top {
+      padding: 64px 0 80px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-family: var(--font-nike-ui);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: var(--font-nike-display);
+      font-size: clamp(56px, 10vw, 116px);
+      font-weight: 900;
+      font-stretch: condensed;
+      font-style: oblique 8deg;
+      line-height: 0.86;
+      text-transform: uppercase;
+      letter-spacing: 0.005em;
+      margin-bottom: 22px;
+    }
+
+    .hero-text {
+      font-family: var(--font-nike-ui);
+      font-size: clamp(16px, 1.45vw, 20px);
+      color: #3c3f44;
+      line-height: 1.65;
+      max-width: 54ch;
+    }
+
+    .hero-image-shell {
+      width: 100%;
+      max-width: 640px;
+      margin-left: auto;
+      aspect-ratio: 4 / 5;
+      display: grid;
+      place-items: center;
+      overflow: visible;
+      background: transparent;
+      padding: 0;
+    }
+
+    .hero-image-shell img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.12));
+    }
+
+    .video-story {
+      position: relative;
+      padding: 20px 0 120px;
+    }
+
+    .video-story-layout {
+      position: relative;
+      display: block;
+      width: 100%;
+      min-height: 290vh;
+    }
+
+    .story-column {
+      position: relative;
+      z-index: 3;
+      width: min(36vw, 520px);
+      margin-left: clamp(18px, 4vw, 60px);
+      padding-top: 56px;
+      display: grid;
+      gap: 62px;
+      transform: none;
+    }
+
+    .story-item {
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .story-num {
+      display: block;
+      font-family: var(--font-nike-display);
+      font-size: clamp(58px, 9vw, 120px);
+      font-weight: 900;
+      font-stretch: condensed;
+      font-style: oblique 7deg;
+      color: var(--nike-red);
+      line-height: 0.8;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .story-item h3 {
+      font-family: var(--font-nike-display);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 900;
+      font-stretch: condensed;
+      line-height: 0.88;
+      margin-bottom: 12px;
+    }
+
+    .story-item p {
+      font-family: var(--font-nike-ui);
+      color: #46494f;
+      line-height: 1.6;
+      font-size: 17px;
+      max-width: 34ch;
+    }
+
+    .video-column {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .video-story-sticky {
+      width: 100vw;
+      height: 100vh;
+      aspect-ratio: auto;
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      isolation: isolate;
+    }
+
+    .video-story-sticky[data-pin-state="fixed"] {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+
+    .video-story-sticky[data-pin-state="bottom"] {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+    }
+
+    .video-stack {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+    }
+
+    .video-stack video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .white-blend {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05) 34%, rgba(255, 255, 255, 0.26));
+      mix-blend-mode: screen;
+    }
+
+    .cards-section {
+      padding: 24px 0 100px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 15, 16, 0.08);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-title {
+      font-family: var(--font-nike-display);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      font-stretch: condensed;
+      line-height: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-family: var(--font-nike-ui);
+      color: #4a4d52;
+      line-height: 1.58;
+      font-size: 15px;
+    }
+
+    .full-width-media {
+      width: 100%;
+      padding: 0 0 92px;
+    }
+
+    .full-width-media img {
+      width: 100%;
+      height: clamp(260px, 42vw, 640px);
+      object-fit: cover;
+    }
+
+    .review {
+      padding-bottom: 112px;
+    }
+
+    .review-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .review-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(15, 15, 16, 0.08);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .review-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 380px;
+    }
+
+    .review-quote {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 15, 16, 0.1);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+      background: #fff;
+      padding: clamp(24px, 4vw, 42px);
+      display: grid;
+      align-content: center;
+      gap: 16px;
+    }
+
+    .review-quote blockquote {
+      font-family: var(--font-nike-ui);
+      font-size: clamp(22px, 2.4vw, 34px);
+      line-height: 1.3;
+      color: #121316;
+      font-weight: 600;
+    }
+
+    .review-quote cite {
+      font-family: var(--font-nike-ui);
+      font-style: normal;
+      font-weight: 600;
+      color: #3a3d43;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      padding: 28px 0;
+    }
+
+    .footer-layout {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 68px;
+      height: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      font-family: var(--font-nike-ui);
+      font-size: 14px;
+      font-weight: 500;
+      color: #2f3238;
+    }
+
+    .copyright {
+      font-family: var(--font-nike-ui);
+      font-size: 13px;
+      color: #656971;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .header-inner {
+        grid-template-columns: auto 1fr auto;
+        height: 70px;
+        gap: 14px;
+      }
+
+      .main-nav {
+        gap: 14px;
+        font-size: 13px;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+      }
+
+      .main-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .search-input {
+        width: 132px;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .hero-image-shell {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .video-story-layout {
+        min-height: 210vh;
+      }
+
+      .story-column {
+        width: min(100% - 24px, 620px);
+        margin-left: 12px;
+        padding-top: 10px;
+      }
+
+      .video-story-sticky {
+        width: 100vw;
+        height: 100svh;
+        border-radius: 0;
+      }
+
+      .video-story-sticky[data-pin-state="fixed"] {
+        top: 0;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .review-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .copyright {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 24px, var(--maxw));
+      }
+
+      .header-inner {
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .search-input {
+        width: 104px;
+        height: 34px;
+      }
+
+      .bag-btn {
+        width: 34px;
+        height: 34px;
+      }
+
+      .hero-top {
+        padding: 42px 0 64px;
+      }
+
+      .story-item h3 {
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      .video-story-layout {
+        min-height: 185vh;
+      }
+
+      .video-story-sticky[data-pin-state="fixed"] {
+        top: 0;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card img {
+        height: 230px;
+      }
+
+      .review-quote blockquote {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-wrap">
+        <a href="#" aria-label="Nike">
+          <img class="brand-logo" src="Logo_NIKE.svg" alt="Nike" />
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Principal">
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">Kids</a>
+        <a href="#">Jordan</a>
+        <a href="#">NikeSKIMS</a>
+        <a href="#">Sports</a>
+      </nav>
+
+      <div class="header-actions">
+        <input class="search-input" type="search" placeholder="Search" aria-label="Buscar" />
+        <button class="bag-btn" aria-label="Bolsa">
+          <img src="bag.png" alt="Bolsa" />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-top">
+      <div class="container hero-layout">
+        <div class="hero-content reveal">
+          <p class="hero-kicker">Nike Running · Nueva generación</p>
+          <h1 class="hero-title">Nike Pegasus 41</h1>
+          <p class="hero-text">
+            Diseñadas para acompañarte en cada kilómetro con una amortiguación reactiva, transición fluida y una sensación de ligereza
+            total. Pegasus 41 eleva tu ritmo con confort premium y control preciso en ciudad o pista.
+          </p>
+        </div>
+        <div class="hero-image-shell reveal">
+          <img src="896589-1200-auto.webp" alt="Nike Pegasus 41" />
+        </div>
+      </div>
+    </section>
+
+    <section class="video-story" id="video-story">
+      <div class="video-story-layout" id="video-story-layout">
+        <div class="story-column">
+          <article class="story-item reveal">
+            <span class="story-num">01</span>
+            <h3>Impulso inteligente</h3>
+            <p>La nueva geometría de mediasuela devuelve energía en cada zancada y mantiene una sensación estable desde el primer apoyo.</p>
+          </article>
+          <article class="story-item reveal">
+            <span class="story-num">02</span>
+            <h3>Transición natural</h3>
+            <p>Su plataforma optimizada favorece una pisada continua, ayudando a sostener ritmo y técnica durante entrenamientos largos.</p>
+          </article>
+          <article class="story-item reveal">
+            <span class="story-num">03</span>
+            <h3>Upper transpirable</h3>
+            <p>El tejido de ingeniería se adapta al pie para ofrecer ventilación, ajuste seguro y comodidad ligera en todo momento.</p>
+          </article>
+          <article class="story-item reveal">
+            <span class="story-num">04</span>
+            <h3>Lista para todo</h3>
+            <p>Diseñada para corredores diarios, combina durabilidad, respuesta y suavidad para sesiones suaves o días de mayor intensidad.</p>
+          </article>
+        </div>
+
+        <div class="video-column" id="video-column">
+          <div class="video-story-sticky" id="video-story-sticky" data-pin-state="top">
+            <div class="video-stack">
+              <video
+                id="story-video"
+                src="Hailuo_Video_SHOT 1 — The Lid Lifts & Shoes_487888625000050691.mp4"
+                muted
+                playsinline
+                preload="auto"
+              ></video>
+              <div class="white-blend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cards-section">
+      <div class="container cards-grid">
+        <article class="product-card reveal">
+          <img src="image.avif" alt="Amortiguación precisa" />
+          <div class="card-body">
+            <h3 class="card-title">Amortiguación Reactiva</h3>
+            <p class="card-text">Espuma de última generación para una pisada suave, estable y con retorno de energía constante.</p>
+          </div>
+        </article>
+
+        <article class="product-card reveal">
+          <img src="image%20(2).avif" alt="Upper transpirable" />
+          <div class="card-body">
+            <h3 class="card-title">Ajuste Transpirable</h3>
+            <p class="card-text">Construcción ligera que mantiene el pie fresco y sujeto para correr con confianza en cualquier ritmo.</p>
+          </div>
+        </article>
+
+        <article class="product-card reveal">
+          <img src="image%20(1).avif" alt="Tracción confiable" />
+          <div class="card-body">
+            <h3 class="card-title">Tracción Segura</h3>
+            <p class="card-text">Suela con agarre optimizado para una transición firme en asfalto seco o condiciones variables.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="full-width-media reveal">
+      <img src="image.jpg" alt="Nike Pegasus 41 full width" />
+    </section>
+
+    <section class="review">
+      <div class="container review-layout">
+        <div class="review-image reveal">
+          <img src="image%20(1).jpg" alt="Evaluador con Nike Pegasus 41" />
+        </div>
+        <div class="review-quote reveal">
+          <blockquote>
+            “El equilibrio perfecto de suavidad y responsividad. Son como algodón, pero elástico”.
+          </blockquote>
+          <cite>Alexander, Evaluador verificado.</cite>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <img class="footer-logo" src="Logo_NIKE.svg" alt="Nike" />
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">Find a store</a>
+        <a href="#">Help</a>
+        <a href="#">Join us</a>
+        <a href="#">Sing in</a>
+      </nav>
+      <p class="copyright">© 2026 Nike, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const videoSection = document.getElementById("video-story");
+      const videoLayout = document.getElementById("video-story-layout");
+      const videoSticky = document.getElementById("video-story-sticky");
+      const video = document.getElementById("story-video");
+
+      let duration = 1;
+      let targetTime = 0;
+      let smoothTime = 0;
+      let rafId = null;
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function setPinState() {
+        const rect = videoSection.getBoundingClientRect();
+        const sectionTop = rect.top + window.scrollY;
+        const sectionHeight = rect.height;
+        const stickyRect = videoSticky.getBoundingClientRect();
+        const stickyHeight = stickyRect.height;
+        const viewportOffset = 0;
+        const maxScrollForPin = sectionTop + sectionHeight - stickyHeight - viewportOffset;
+        const currentY = window.scrollY;
+
+        if (currentY < sectionTop - viewportOffset) {
+          videoSticky.dataset.pinState = "top";
+        } else if (currentY >= sectionTop - viewportOffset && currentY < maxScrollForPin) {
+          videoSticky.dataset.pinState = "fixed";
+        } else {
+          videoSticky.dataset.pinState = "bottom";
+        }
+
+        if (videoSticky.dataset.pinState === "fixed") {
+          videoSticky.style.left = "0";
+          videoSticky.style.right = "auto";
+          videoSticky.style.width = "100vw";
+          videoSticky.style.transform = "none";
+        } else {
+          videoSticky.style.left = "50%";
+          videoSticky.style.right = "auto";
+          videoSticky.style.width = "100vw";
+          videoSticky.style.transform = "translateX(-50%)";
+        }
+      }
+
+      function updateProgress() {
+        const rect = videoLayout.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const passed = -rect.top;
+        const progress = clamp(total > 0 ? passed / total : 0, 0, 1);
+
+        targetTime = duration * progress;
+      }
+
+      function animateVideo() {
+        smoothTime += (targetTime - smoothTime) * 0.12;
+        if (video.readyState >= 2) {
+          const delta = Math.abs(video.currentTime - smoothTime);
+          if (delta > 0.01) {
+            video.currentTime = clamp(smoothTime, 0, duration);
+          }
+        }
+        rafId = requestAnimationFrame(animateVideo);
+      }
+
+      function onScrollResize() {
+        setPinState();
+        updateProgress();
+      }
+
+      function initScrub() {
+        if (!video) return;
+
+        video.pause();
+        targetTime = 0.08;
+        smoothTime = 0.08;
+        video.currentTime = 0.08;
+
+        if (video.readyState >= 1) {
+          duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 1;
+        }
+
+        video.addEventListener("loadedmetadata", function () {
+          duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 1;
+        });
+
+        window.addEventListener("scroll", onScrollResize, { passive: true });
+        window.addEventListener("resize", onScrollResize);
+        onScrollResize();
+        animateVideo();
+      }
+
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18, rootMargin: "0px 0px -7% 0px" }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+      initScrub();
+
+      window.addEventListener("beforeunload", function () {
+        if (rafId) cancelAnimationFrame(rafId);
+      });
+    })();
+  </script>
+</body>
+</html>
